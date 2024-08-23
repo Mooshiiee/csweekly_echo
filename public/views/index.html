@@ -1,0 +1,32 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>csweekly</title>
+</head>
+<body>
+    <h1>Hello World bro</h1>
+    {{.}}
+
+    {{if .}}
+        {{range .}}
+        <div class="problem">
+            <p class="label">ID:</p> <p>{{.ID}}</p>
+            <p class="label">Title:</p> <p>{{.Title}}</p>
+            <p class="label">Text:</p> <p>{{.Text}}</p>
+            <p class="label">Hint:</p> <p>{{.Hint}}</p>
+            <p class="label">Constraints:</p> <p>{{.Constraints}}</p>
+            <p class="label">Solution:</p> <p>{{.Solution}}</p>
+            <p class="label">Solved:</p> <p>{{.IsProject}}</p>
+        </div>
+        {{else}}
+        <p>No problems found.</p>
+        {{end}}
+    {{else}}
+    <p>Error loading problems.</p>
+    {{end}}
+</body>
+</html>
+{{end}}
