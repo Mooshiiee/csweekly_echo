@@ -54,7 +54,7 @@ func QueryUsers(db *sql.DB) ([]user, error) {
 }
 
 func QueryProblems(db *sql.DB) ([]problem, error) {
-	rows, err := db.Query("SELECT * FROM problems")
+	rows, err := db.Query("SELECT * FROM problems ORDER BY id DESC")
 	if err != nil {
 		return nil, err
 	}
