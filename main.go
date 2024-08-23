@@ -27,6 +27,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 
 func main() {
 	e := echo.New()
+	e.Static("/", "public")
 	e.Use(middleware.Logger())
 
 	//init database
@@ -45,7 +46,7 @@ func main() {
 		return indexHandler(c, database)
 	})
 
-	e.GET("/:id", getProblem)
+	e.GET("/problem/:id", getProblem)
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
