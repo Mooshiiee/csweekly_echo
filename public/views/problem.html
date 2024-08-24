@@ -26,18 +26,63 @@
         </div>
     </header>
 
-    <main class="flex-grow">
+    <main class="flex-grow mb-auto">
         <div class="container mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
             <div class="relative block overflow-hidden rounded-lg border bg-white border-gray-100 p-4 sm:p-6 lg:p-8" >
 
                 <span
-                class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
+                class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600"
                 ></span>
-    
-                <h1 class="underline">Problem View</h1>
-                <h2>{{.ID}}</h2>
-                <h2>{{.Title}}</h2>
-                <h2>{{.Text}}</h2>
+                
+                <div class="flex mb-4">
+                    <strong class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-xs font-medium text-white">
+                        Week #{{.ID}}
+                    </strong>
+                    {{ if .IsProject }}
+                        <strong class="rounded border border-teal-600 bg-teal-600 px-3 py-1.5 ml-2 text-xs font-medium text-white">
+                            Project
+                        </strong>
+                    {{ end }}
+                </div>
+
+
+                <h1 class="underline text-3xl text-center mb-4">
+                    {{.Title}}
+                </h1>
+                <p class="text-lg mb-6">
+                    {{.Text}}
+                </p>
+                
+                <div class="border rounded-lg">
+                    <!-- Forced Opened Accordion -->
+                    <div class="border-b">
+                      <div class="p-4 bg-gray-100">
+                        <h2 class="font-medium">Constraints</h2>
+                      </div>
+                      <div class="p-4">
+                        <p class="text-gray-600">{{.Constraints}}</p>
+                      </div>
+                    </div>
+                  
+                    <!-- Toggle Accordion -->
+                    <div>
+                      <input type="checkbox" id="toggle-12" class="hidden peer" />
+                      <label for="toggle-12" class="flex justify-between items-center p-4 cursor-pointer bg-amber-200">
+                        <h2 class="font-medium">Toggle Hint</h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </label>
+                      <div class="max-h-0 overflow-hidden transition-all duration-300 peer-checked:max-h-screen">
+                        <div class="p-4">
+                          <p class="text-gray-600">{{.Hint}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  
+                  
             </div>
         </div>x
     </main>
@@ -46,9 +91,12 @@
         <div class="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
           <div class="sm:flex sm:items-center sm:justify-between">
             <div class="flex justify-center sm:justify-start">
-             <h1 class="bg-gradient-to-r from-sky-400 via-purple-500 to-blue-400 bg-clip-text font-extrabold text-xl text-transparent">
-                csweekly.xyz
-             </h1>
+            <a href="/">
+                <h1 class="bg-gradient-to-r from-sky-400 via-purple-500 to-blue-400 bg-clip-text font-extrabold text-xl text-transparent">
+                    csweekly.xyz
+                 </h1>
+            </a>
+
             </div>
       
             <p class="mt-4 text-center text-gray-500 lg:mt-0 lg:text-right">
