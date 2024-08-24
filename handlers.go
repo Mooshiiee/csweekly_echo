@@ -86,11 +86,11 @@ func QueryProblems(db *sql.DB) ([]problem, error) {
 }
 
 // takes in an sql.DB connection and the id from the request url, then returns
-func QuerySingleProblem(db *sql.DB, id int) (problem, error) {
+func QuerySingleProblem(db *sql.DB, idString string) (problem, error) {
 
 	var problem problem
 
-	err := db.QueryRow("SELECT * FROM problems WHERE id = ?", id).Scan(
+	err := db.QueryRow("SELECT * FROM problems WHERE id = ?", idString).Scan(
 		&problem.ID,
 		&problem.Title,
 		&problem.Text,

@@ -46,7 +46,9 @@ func main() {
 		return indexHandler(c, database)
 	})
 
-	e.GET("/problem/:id", getProblem)
+	e.GET("/problem/:id", func(c echo.Context) error {
+		return getProblem(c, database)
+	})
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
@@ -60,7 +62,11 @@ func indexHandler(c echo.Context, database *sql.DB) error {
 	return c.Render(http.StatusOK, "index", rows)
 }
 
-func getProblem(c echo.Context) error {
-	id := c.Param("id")
-	return c.Render(http.StatusOK, "problem", id)
+func getProblem(c echo.Context, database *sql.DB) error {
+	idString := c.Param("id")
+	row, err := QuerySingleProblem(database, idString)
+	if err != nil {
+		return c.Render(http.StatusInternalServerError, "index", err)
+	}
+	return c.Render(http.StatusOK, "problem", row)
 }
