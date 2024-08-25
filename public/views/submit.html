@@ -1,0 +1,181 @@
+{{define "submit"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/output.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        body {
+            background-color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='199' viewBox='0 0 100 199'%3E%3Cg fill='%23c026d3' fill-opacity='0.22'%3E%3Cpath d='M0 199V0h1v1.99L100 199h-1.12L1 4.22V199H0zM100 2h-.12l-1-2H100v2z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <title>Submit</title>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+    <header class="text-white">
+        <div class="flex p-4">
+            <a href="/" class="flex items-center space-x-2 hover:underline">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+                </svg>
+                <p>Go Back</p>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <div class="container flex-col rounded-lg bg-slate-700 max-w-screen-lg px-4 py-8 sm:px-6 lg:px-8 mx-auto">
+            
+            <form action="#" method="POST">
+
+            <!-- Title -->
+            <div class="mb-5">
+                <label for="Title" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  Title
+                </label>
+              
+                <input
+                  name="Title"
+                  type="text"
+                  id="Title"
+                  placeholder="Title for the problem"
+                  class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                />
+            </div>
+  
+            <!-- Text : text area -->
+            <div class="mb-5">
+                <label for="Text" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                  Text
+                </label>
+              
+                <textarea
+                  name="Text"
+                  id="Text"
+                  class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                  rows="4"
+                  placeholder="The main description for the problem/project"
+                ></textarea>
+            </div>
+
+            <!-- Solution : text area -->
+            <div class="mb-5">
+                <label for="Constraints" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Constraints
+                </label>
+                
+                <textarea
+                    name="Constraints"
+                    id="Constraints"
+                    class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    rows="4"
+                    placeholder="The constraints for the problem/project"
+                ></textarea>
+            </div>
+
+            <!-- Hint : text area -->
+            <div class="mb-5">
+                <label for="Hint" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Hint
+                </label>
+                
+                <textarea
+                    name="Hint"
+                    id="Hint"
+                    class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    rows="4"
+                    placeholder="A single hint for the user to read"
+                ></textarea>
+            </div>
+
+            <!-- Solution : text area -->
+            <div class="mb-5">
+                <label for="Solution" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Solution
+                </label>
+                
+                <textarea
+                    name="Solution"
+                    id="Solution"
+                    class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    rows="4"
+                    placeholder="The solution to the problem. Leave blank to later update it a different day"
+                ></textarea>
+            </div>
+
+            <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+            <!-- Constraints : IsProject Toggle : Preline Library -->
+            <div class="flex items-center mb-5">
+                <label for="hs-basic-with-description" class="text-sm text-gray-500 me-3 dark:text-neutral-400">
+                    DSA Problem
+                </label>
+                <input name="IsProject" type="checkbox" id="hs-basic-with-description" class="relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent rounded-full transition-colors ease-in-out duration-200 disabled:opacity-50 checked:bg-none checked:text-teal-600 dark:bg-rose-500 dark:border-rose-500 dark:checked:bg-teal-600 dark:checked:border-teal-600 dark:focus:ring-offset-gray-600
+                before:inline-block before:size-6 before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-blue-200 dark:checked:before:bg-blue-200">
+                <label for="hs-basic-with-description" class="text-sm text-gray-500 ms-3 dark:text-neutral-400">
+                    Project 
+                </label>
+            </div>
+
+            <!-- Secret Key : text area -->
+            <div class="mb-5">
+                <label for="SecretKey" class="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                    Secret Key
+                </label>
+                
+                <textarea
+                    name="Secret"
+                    id="SecretKey"
+                    class="mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    rows="4"
+                    placeholder="Very Very Very Secret!"
+                ></textarea>
+            </div>
+
+            <button
+            class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 mx-auto text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
+            >
+                Submit Weekly Problem
+            </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8">
+          <div class="sm:flex sm:items-center sm:justify-between">
+            <div class="flex justify-center sm:justify-start">
+            <a href="/">
+                <h1 class="bg-gradient-to-r from-sky-400 via-purple-500 to-blue-400 bg-clip-text font-extrabold text-xl text-transparent">
+                    csweekly.xyz
+                 </h1>
+            </a>
+
+            </div>
+      
+            <p class="mt-4 text-center text-gray-500 lg:mt-0 lg:text-right">
+              Made with love, by 
+              <a href="https://github.com/Mooshiiee" 
+                 class="text-indigo-500 hover:underline">
+                 Mustafa
+            </a>
+            </p>
+          </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+{{end}}

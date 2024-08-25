@@ -21,6 +21,22 @@ type problem struct {
 	IsProject   bool
 }
 
+type ProblemPost struct {
+	Text        string `json:"text"`
+	Title       string `json:"title"`
+	Constraints string `json:"constraints"`
+	Hint        string `json:"hint"`
+	Solution    string `json:"solution"`
+	IsProject   bool   `json:"isproject"`
+	Secret      string `json:"secret"`
+}
+
+func PostProblem(data *ProblemPost) (problem, error) {
+	db, err := InitDB()
+
+	insert, err := db.Query()
+}
+
 // takes in sql.db object, will return an array of users along with error
 func QueryUsers(db *sql.DB) ([]user, error) {
 	rows, err := db.Query("SELECT * FROM users")
@@ -37,7 +53,6 @@ func QueryUsers(db *sql.DB) ([]user, error) {
 		if err := rows.Scan(&user.ID, &user.Name); err != nil {
 			return nil, fmt.Errorf("error scanning row: %w", err)
 			//return users as nil, and error as the formatted message
-
 		}
 
 		users = append(users, user)

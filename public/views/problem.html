@@ -9,12 +9,15 @@
         body {
             background-color: #0f172a;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='199' viewBox='0 0 100 199'%3E%3Cg fill='%23c026d3' fill-opacity='0.22'%3E%3Cpath d='M0 199V0h1v1.99L100 199h-1.12L1 4.22V199H0zM100 2h-.12l-1-2H100v2z'%3E%3C/path%3E%3C/g%3E%3C/svg%3E"); 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
     </style>
     <title>Problem #{{.ID}}</title>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
     <header class="text-white">
         <div class="flex p-4">
             <a href="/" class="flex items-center space-x-2 hover:underline">
@@ -26,13 +29,19 @@
         </div>
     </header>
 
-    <main class="flex-grow mb-auto">
+    <main class="flex-grow">
         <div class="container mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
             <div class="relative block overflow-hidden rounded-lg border bg-white border-gray-100 p-4 sm:p-6 lg:p-8" >
 
-                <span
-                class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600"
-                ></span>
+                {{if .IsProject}}
+                    <span
+                    class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-purple-600 via-teal-600 to-purple-600"
+                    ></span>
+                {{else}}
+                    <span
+                    class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-purple-600 via-rose-500 to-purple-600"
+                    ></span>
+                {{end}}
                 
                 <div class="flex mb-4">
                     <strong class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-xs font-medium text-white">
@@ -40,7 +49,11 @@
                     </strong>
                     {{ if .IsProject }}
                         <strong class="rounded border border-teal-600 bg-teal-600 px-3 py-1.5 ml-2 text-xs font-medium text-white">
-                            Project
+                            Small Project
+                        </strong>
+                    {{else}}
+                        <strong class="rounded border border-#FF6B6B bg-rose-500 px-3 py-1.5 ml-2 text-xs font-medium text-white">
+                            DSA
                         </strong>
                     {{ end }}
                 </div>
@@ -53,22 +66,34 @@
                     {{.Text}}
                 </p>
                 
-                <div class="border rounded-lg">
-                    <!-- Forced Opened Accordion -->
+                <div class="border rounded-lg mb-4">
+                    <!-- Forced Opened Accordion for Constraints-->
                     <div class="border-b">
-                      <div class="p-4 bg-gray-100">
-                        <h2 class="font-medium">Constraints</h2>
+                      <div class="p-4 bg-gray-100 rounded-t-lg">
+                        <div class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+                            </svg>                                                
+                            <h2 class="font-medium pl-3">Constraints</h2>
+                        </div>
                       </div>
                       <div class="p-4">
                         <p class="text-gray-600">{{.Constraints}}</p>
                       </div>
                     </div>
                   
-                    <!-- Toggle Accordion -->
+                    <!-- Toggle Accordion for Hint -->
                     <div>
-                      <input type="checkbox" id="toggle-12" class="hidden peer" />
-                      <label for="toggle-12" class="flex justify-between items-center p-4 cursor-pointer bg-amber-200">
-                        <h2 class="font-medium">Toggle Hint</h2>
+                      <input type="checkbox" id="toggle-hint" class="hidden peer" />
+                      <label for="toggle-hint" class="flex justify-between items-center p-4 cursor-pointer bg-sky-300">
+                        <div class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                            </svg>                             
+                            <h2 class="font-medium text-black pl-3">
+                                Hint
+                            </h2>
+                        </div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -79,12 +104,34 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                
-                  
-                  
-            </div>
-        </div>x
+
+                  <!-- Toggle Accordion for Solution -->
+                  {{if .Solution}}
+                  <div>
+                    <input type="checkbox" id="toggle-solution" class="hidden peer" />
+                    <label for="toggle-solution" class="flex justify-between items-center p-4 cursor-pointer bg-purple-300 rounded-b-lg">
+                        <div class="flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+                            </svg>
+                            <h2 class="font-medium text-black pl-3">
+                                Solution
+                            </h2>
+                        </div>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-transform peer-checked:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>                    
+                    </label>
+                    <div class="max-h-0 overflow-hidden transition-all duration-300 peer-checked:max-h-screen">
+                      <div class="p-4">
+                        <p class="text-gray-600">{{.Solution}}</p>
+                      </div>
+                    </div>
+                    </div>
+                    {{end}}
+                </div>
+        </div>
     </main>
 
     <footer>
@@ -104,11 +151,11 @@
               <a href="https://github.com/Mooshiiee" 
                  class="text-indigo-500 hover:underline">
                  Mustafa
-              </a>
+            </a>
             </p>
           </div>
         </div>
-      </footer>
+    </footer>
 </body>
 </html>
 {{end}}

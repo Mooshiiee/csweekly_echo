@@ -50,6 +50,10 @@ func main() {
 		return getProblem(c, database)
 	})
 
+	e.GET("/submit", getSubmitPage)
+
+	e.POST("/submit-post", postSubmitProblem)
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
@@ -69,4 +73,17 @@ func getProblem(c echo.Context, database *sql.DB) error {
 		return c.Render(http.StatusInternalServerError, "index", err)
 	}
 	return c.Render(http.StatusOK, "problem", row)
+}
+
+func getSubmitPage(c echo.Context) error {
+	return c.Render(http.StatusOK, "submit", nil)
+}
+
+func postSubmitProblem(c echo.Context) error {
+	var postData ProblemPost
+	err := c.Bind(&postData)
+	if err != nil {
+		return c.String(http.StatusBadRequest, "bad request")
+	}
+	problem, err := PostProblem(postData)
 }
