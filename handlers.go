@@ -21,20 +21,27 @@ type problem struct {
 	IsProject   bool
 }
 
+// Represents the Binding of Raw post data to the Problem struct.
+// This data should be handled as dirty and dangerous.
 type ProblemPost struct {
-	Text        string `json:"text"`
-	Title       string `json:"title"`
-	Constraints string `json:"constraints"`
-	Hint        string `json:"hint"`
-	Solution    string `json:"solution"`
-	IsProject   bool   `json:"isproject"`
-	Secret      string `json:"secret"`
+	Title       string `form:"title"`
+	Text        string `form:"text"`
+	Constraints string `form:"constraints"`
+	Hint        string `form:"hint"`
+	Solution    string `form:"solution"`
+	IsProject   bool   `form:"isproject"`
+	Secret      string `form:"secret"`
 }
 
-func PostProblem(data *ProblemPost) (problem, error) {
-	db, err := InitDB()
-
-	insert, err := db.Query()
+// DTO = Data Transfer Object. Will represent the
+// clean and sanitized version of the input data.
+type ProblemDTO struct {
+	Title       string
+	Text        string
+	Constraints string
+	Hint        string
+	Solution    string
+	IsProject   bool
 }
 
 // takes in sql.db object, will return an array of users along with error

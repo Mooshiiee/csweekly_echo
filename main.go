@@ -6,9 +6,11 @@ package main
 import (
 	"csweekly-echo/db"
 	"database/sql"
+	"fmt"
 	"html/template"
 	"io"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -29,6 +31,15 @@ func main() {
 	e := echo.New()
 	e.Static("/", "public")
 	e.Use(middleware.Logger())
+
+	e.Use(middleware.CSRFWithConfig(middleware.CSRFConfig{
+		TokenLookup:    "cookie:_csrf",
+		CookiePath:     "/",
+		CookieDomain:   "example.com",
+		CookieSecure:   true,
+		CookieHTTPOnly: true,
+		CookieSameSite: http.SameSiteStrictMode,
+	}))
 
 	//init database
 	database, err := db.InitDB()
@@ -52,7 +63,9 @@ func main() {
 
 	e.GET("/submit", getSubmitPage)
 
-	e.POST("/submit-post", postSubmitProblem)
+	e.POST("/submit-post", func(c echo.Context) error {
+		return postSubmitProblem(c, database)
+	})
 
 	e.Logger.Fatal(e.Start(":1323"))
 }
@@ -79,11 +92,47 @@ func getSubmitPage(c echo.Context) error {
 	return c.Render(http.StatusOK, "submit", nil)
 }
 
-func postSubmitProblem(c echo.Context) error {
-	var postData ProblemPost
-	err := c.Bind(&postData)
+// takes in POST request of a Problem object + Security key and then inserts the data
+// to database if authorized
+func postSubmitProblem(c echo.Context, database *sql.DB) error {
+	var formData ProblemPost
+	err := c.Bind(&formData)
 	if err != nil {
 		return c.String(http.StatusBadRequest, "bad request")
 	}
-	problem, err := PostProblem(postData)
+
+	if formData.Secret != os.Getenv("SECRET_KEY") {
+		return c.String(http.StatusUnauthorized, "Invalid Secret Key")
+	}
+
+	ctx := c.Request().Context()
+
+	result, err := database.ExecContext(ctx,
+		"INSERT INTO problems (title, text, constraints, hint, solution, isproject) VALUES (?, ?, ?, ?, ?, ?)",
+		formData.Title,
+		formData.Text,
+		formData.Constraints,
+		formData.Hint,
+		formData.Solution,
+		formData.IsProject,
+	)
+	if err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+
+	// Check and get the last inserted ID
+	id, err := result.LastInsertId()
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "error: could not retrieve last insert ID")
+	}
+
+	// Checkc and get the number of rows affected
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return c.String(http.StatusInternalServerError, "error: could not retrieve rows affected")
+	}
+
+	// Return the response string
+	response := fmt.Sprintf("Created ID: %d, Rows Affected: %d", id, rowsAffected)
+	return c.String(http.StatusCreated, response)
 }

@@ -63,7 +63,7 @@
                     {{.Title}}
                 </h1>
                 <p class="text-lg mb-6">
-                    {{.Text}}
+                    {{.Text | html}}
                 </p>
                 
                 <div class="border rounded-lg mb-4">
@@ -100,7 +100,7 @@
                       </label>
                       <div class="max-h-0 overflow-hidden transition-all duration-300 peer-checked:max-h-screen">
                         <div class="p-4">
-                          <p class="text-gray-600">{{.Hint}}</p>
+                          <p class="text-gray-600">{{.Hint | html}}</p>
                         </div>
                       </div>
                     </div>
