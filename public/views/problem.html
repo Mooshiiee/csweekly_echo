@@ -48,15 +48,15 @@
                 {{end}}
                 
                 <div class="flex mb-4">
-                    <strong class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-xs font-medium text-white">
+                    <strong class="rounded border border-indigo-600 bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white">
                         Week #{{.ID}}
                     </strong>
                     {{ if .IsProject }}
-                        <strong class="rounded border border-teal-600 bg-teal-600 px-3 py-1.5 ml-2 text-xs font-medium text-white">
+                        <strong class="rounded border border-teal-600 bg-teal-600 px-3 py-1.5 ml-2 text-sm font-medium text-white">
                             Small Project
                         </strong>
                     {{else}}
-                        <strong class="rounded border border-#FF6B6B bg-rose-500 px-3 py-1.5 ml-2 text-xs font-medium text-white">
+                        <strong class="rounded border border-rose-600 bg-rose-600 px-3 py-1.5 ml-2 text-sm font-medium text-white">
                             DSA
                         </strong>
                     {{ end }}
@@ -64,33 +64,33 @@
                     <div class="ml-auto">
                         {{if .Difficulty | eq "Easy"}} 
                         <span
-                            class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700 mb-1"
+                            class="inline-flex items-center justify-center rounded-full bg-emerald-200 px-2.5 py-0.5 text-emerald-950 mb-1"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-1">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
                             </svg>
                           
-                            <p class="whitespace-nowrap text-sm">{{.Difficulty}}</p>
+                            <p class="whitespace-nowrap text-lg">{{.Difficulty}}</p>
                         </span>
                         {{else if .Difficulty | eq "Medium"}}
                         <span
-                        class="inline-flex items-center justify-center rounded-full bg-amber-100 px-2.5 py-0.5 text-amber-700 mb-1 sm:mb-0"
+                        class="inline-flex items-center justify-center rounded-full bg-amber-200 px-2.5 py-0.5 text-amber-950 mb-1 sm:mb-0"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.036-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959v0a.64.64 0 0 1-.657.643 48.39 48.39 0 0 1-4.163-.3c.186 1.613.293 3.25.315 4.907a.656.656 0 0 1-.658.663v0c-.355 0-.676-.186-.959-.401a1.647 1.647 0 0 0-1.003-.349c-1.036 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401v0c.31 0 .555.26.532.57a48.039 48.039 0 0 1-.642 5.056c1.518.19 3.058.309 4.616.354a.64.64 0 0 0 .657-.643v0c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.035 1.008-1.875 2.25-1.875 1.243 0 2.25.84 2.25 1.875 0 .369-.128.713-.349 1.003-.215.283-.4.604-.4.959v0c0 .333.277.599.61.58a48.1 48.1 0 0 0 5.427-.63 48.05 48.05 0 0 0 .582-4.717.532.532 0 0 0-.533-.57v0c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.035 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.37 0 .713.128 1.003.349.283.215.604.401.96.401v0a.656.656 0 0 0 .658-.663 48.422 48.422 0 0 0-.37-5.36c-1.886.342-3.81.574-5.766.689a.578.578 0 0 1-.61-.58v0Z" />
                           </svg>
                           
-                            <p class="whitespace-nowrap text-sm">{{.Difficulty}}</p>
+                            <p class="whitespace-nowrap text-lg">{{.Difficulty}}</p>
                         </span>
                         {{else if .Difficulty | eq  "Hard"}}
                         <span
-                        class="inline-flex items-center justify-center rounded-full bg-red-100 px-2.5 py-0.5 text-red-700 mb-1 sm:mb-0"
+                        class="inline-flex items-center justify-center rounded-full bg-red-200 border-red-950 px-2.5 py-0,5 text-red-800 mb-1 sm:mb-0"
                         >
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
                           </svg>
                           
-                            <p class="whitespace-nowrap text-sm">{{.Difficulty}}</p>
+                            <p class="whitespace-nowrap text-lg">{{.Difficulty}}</p>
                         </span>
                         {{end}}
                     </div>
@@ -101,9 +101,12 @@
                 <p class="underline text-2xl text-center">
                     {{.Title}}
                 </p>
-                <p class="text-lg mb-6 whitespace-pre-line">
-                    {{.Text}}
-                </p>
+                <div class="bg-slate-200 rounded-xl px-6 mt-4">
+                    <p class="text-lg mb-6 whitespace-pre-line">
+                        {{.Text}}
+                    </p>
+                </div>
+                
                 
                 <div class="border rounded-lg mb-4 bg-white">
                     <!-- Forced Opened Accordion for Constraints-->
