@@ -11,6 +11,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -107,14 +108,22 @@ func postSubmitProblem(c echo.Context, database *sql.DB) error {
 
 	ctx := c.Request().Context()
 
+	datetime_now := time.Now().Format(time.RFC3339)
+	fmt.Println(datetime_now)
+
 	result, err := database.ExecContext(ctx,
-		"INSERT INTO problems (title, text, constraints, hint, solution, isproject) VALUES (?, ?, ?, ?, ?, ?)",
+		"INSERT INTO problems (title, text, constraints, hint, solution, isproject, datetime, weeknumber, poster, link, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 		formData.Title,
 		formData.Text,
 		formData.Constraints,
 		formData.Hint,
 		formData.Solution,
 		formData.IsProject,
+		datetime_now,
+		formData.WeekNumber,
+		formData.Poster,
+		formData.Link,
+		formData.Difficulty,
 	)
 	if err != nil {
 		return c.String(http.StatusBadRequest, err.Error())

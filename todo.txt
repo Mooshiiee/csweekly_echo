@@ -1,0 +1,1 @@
+- Change schema to include week_number field, date_time, amd possibly other data

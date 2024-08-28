@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"os"
+	"time"
 )
 
 type user struct {
@@ -19,6 +20,11 @@ type problem struct {
 	Constraints string
 	Solution    string
 	IsProject   bool
+	DateTime    string
+	WeekNumber  int
+	Poster      string
+	Link        string
+	Difficulty  string
 }
 
 // Represents the Binding of Raw post data to the Problem struct.
@@ -30,18 +36,11 @@ type ProblemPost struct {
 	Hint        string `form:"hint"`
 	Solution    string `form:"solution"`
 	IsProject   bool   `form:"isproject"`
+	WeekNumber  int    `form:"weeknumber"`
+	Poster      string `form:"poster"`
+	Link        string `form:"link"`
+	Difficulty  string `form:"difficulty"`
 	Secret      string `form:"secret"`
-}
-
-// DTO = Data Transfer Object. Will represent the
-// clean and sanitized version of the input data.
-type ProblemDTO struct {
-	Title       string
-	Text        string
-	Constraints string
-	Hint        string
-	Solution    string
-	IsProject   bool
 }
 
 // takes in sql.db object, will return an array of users along with error
@@ -96,9 +95,23 @@ func QueryProblems(db *sql.DB) ([]problem, error) {
 			&problem.Hint,
 			&problem.Constraints,
 			&problem.Solution,
-			&problem.IsProject); err != nil {
+			&problem.IsProject,
+			&problem.DateTime,
+			&problem.WeekNumber,
+			&problem.Poster,
+			&problem.Link,
+			&problem.Difficulty); err != nil {
 			return problems, err
 		}
+		//parse DateTime
+		parsedTime, err := time.Parse(time.RFC3339, problem.DateTime)
+		if err != nil {
+			return problems, err
+		}
+		//Reformat Datetime and replace the data
+		formattedTime := parsedTime.Format("01-02-2006 03:04 PM")
+		problem.DateTime = formattedTime
+
 		problems = append(problems, problem)
 	}
 	if err = rows.Err(); err != nil {
@@ -120,11 +133,25 @@ func QuerySingleProblem(db *sql.DB, idString string) (problem, error) {
 		&problem.Constraints,
 		&problem.Solution,
 		&problem.IsProject,
+		&problem.DateTime,
+		&problem.WeekNumber,
+		&problem.Poster,
+		&problem.Link,
+		&problem.Difficulty,
 	)
 	if err != nil {
 		//return an empty struct if error
 		return problem, fmt.Errorf("error scanning Problem instance: %w", err)
 	}
+
+	//parse DateTime
+	parsedTime, err := time.Parse(time.RFC3339, problem.DateTime)
+	if err != nil {
+		return problem, fmt.Errorf("error parsing DateTime: %w", err)
+	}
+	//Reformat Datetime and replace the data
+	formattedTime := parsedTime.Format("01-02-2006 03:04 PM")
+	problem.DateTime = formattedTime
 
 	return problem, nil
 }
