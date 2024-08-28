@@ -94,9 +94,9 @@
                 </div>
 
 
-                <h1 class="underline text-3xl text-center mb-1">
+                <p class="underline text-2xl text-center">
                     {{.Title}}
-                </h1>
+                </p>
                 <p class="text-lg mb-6 whitespace-pre-line">
                     {{.Text}}
                 </p>
@@ -169,6 +169,15 @@
                 </div>
 
                 <div class="mt-6 sm:flex sm:items-center sm:gap-2 justify-center">
+
+                    <div class="flex items-center gap-1 text-gray-500 mb-1 sm:mb-0 text-sm">
+                        <a href="{{.Link}}" class="flex items-center space-x-2 hover:underline">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                            </svg>
+                            Source
+                        </a>                          
+                    </div>
 
                     <span class="hidden sm:block text-gray-500" aria-hidden="true">&middot;</span>
 
