@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func InitDB() (*sql.DB, error) {
@@ -12,10 +14,10 @@ func InitDB() (*sql.DB, error) {
 
 	//ENV FOR DEV
 
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal("Error loading .env file")
-	// }
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
 	url := os.Getenv("TURSO_DATABASE_URL")
 	if url == "" { //check if ENV is working correctly
