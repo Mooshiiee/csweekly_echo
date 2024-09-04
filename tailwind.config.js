@@ -6,14 +6,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+        fontFamily: {
+          'vt323': ['"VT323"', 'monospace'],
+        },
         animation: {
-        border: 'background ease infinite',
+          border: 'background ease infinite',
         },
         keyframes: {
-        background: {
-            '0%, 100%': { backgroundPosition: '0% 50%' },
-            '50%': { backgroundPosition: '100% 50%' },
-        },
+          background: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+          },
         },
     },
   },
