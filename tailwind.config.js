@@ -8,6 +8,10 @@ module.exports = {
     extend: {
         fontFamily: {
           'vt323': ['"VT323"', 'monospace'],
+          'pixelify': ['"Pixelify Sans"', 'sans-serif'],
+          'jersey10': ['"Jersey 10"', 'sans-serif'],
+          'modern-dos16': ['"ModernDOS8x16"', 'monospace'],
+          'modern-dos14': ['"ModernDOS8x14"', 'monospace'],
         },
         animation: {
           border: 'background ease infinite',
