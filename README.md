@@ -1,6 +1,6 @@
 # CSWeekly 🖥️
 
-A dynamic website for hosting weekly coding problems for SCSU Computer Science Club. Challenge yourself with new programming problems every week and improve your coding skills!
+A website for hosting weekly coding problems for SCSU Computer Science Club.
 
 ## 🚀 Features
 
@@ -9,14 +9,14 @@ A dynamic website for hosting weekly coding problems for SCSU Computer Science C
 - Beatifully simple and lightweight Go backend using Echo framework
 - Cloud-based SQLite database with Turso
 - Deployed on Digital Ocean App Engine
+- Post submission form protected by secret password configured through environement variable
 
 ## 💻 Tech Stack
 
 - **Backend:** Go with Echo framework
 - **Database:** Turso (Cloud SQLite)
 - **Frontend:** TailwindCSS, HyperUI
-- **Deployment:** Digital Ocean App Engine
-- **Build:** Heroku/Go buildpack
+- **Deployment:** Digital Ocean App Engine with Heroku/Go buildpack
 
 ## 📁 Project Structure
 
